@@ -59,3 +59,29 @@ resource "aviatrix_transit_gateway" "azure_transit_gateway" {
   connected_transit        = true
   enable_transit_firenet = true
 }
+
+
+##
+## EMEA
+##
+
+
+resource "aviatrix_transit_gateway" "azure_transit_gateway-emea" {
+  account_name             = "azure-account"
+  gw_name                  = "azure-transit-emea-1"
+  vpc_id                   = aviatrix_vpc.azure_vnet_west_emea.vpc_id
+  cloud_type               = 8
+  vpc_reg                  = "West Europe"
+  gw_size                  = "Standard_D3_v2"
+  subnet                   = aviatrix_vpc.azure_vnet_west_emea.public_subnets[2].cidr
+  ha_subnet                = aviatrix_vpc.azure_vnet_west_emea.public_subnets[3].cidr
+  ha_gw_size               = "Standard_D3_v2"
+  zone                     = "az-1"
+  ha_zone                  = "az-2"
+  enable_firenet           = false
+  enable_hybrid_connection = false
+  enable_active_mesh       = true
+  enable_segmentation      = true
+  connected_transit        = true
+  enable_transit_firenet = true
+}
